@@ -9,7 +9,7 @@ class ContentDelivery:
     def __init__(self, s3_bucket_name, aws_access_key_id=None, aws_secret_access_key=None, region_name='us-east-2'):
         self.s3_bucket_name = s3_bucket_name
 
-        # Initialize S3 client with optional credentials
+        # Initialize S3 client with credentials
         self.s3_client = boto3.client(
             's3',
             aws_access_key_id=aws_access_key_id,
@@ -61,7 +61,8 @@ class ContentDelivery:
         
         if base_url:
             # Construct public URLs assuming the bucket is publicly accessible
-            return [f'{base_url}/{key}' for key in object_keys]
+            return [f'{key}' for key in object_keys]
+            #return [f'{base_url}/{key}' for key in object_keys]
         else:
             # Generate pre-signed URLs for private S3 objects
             urls = []
@@ -73,5 +74,3 @@ class ContentDelivery:
                 )
                 urls.append(url)
             return urls
-
-
