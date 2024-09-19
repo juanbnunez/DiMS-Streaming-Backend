@@ -27,6 +27,6 @@ def get_cloudfront_url():
     return domain_name
 
 # Example usage
-if __name__ == "__main__":
+""" if __name__ == "__main__":
     cloudfront_url = get_cloudfront_url()
-    print(f"CloudFront URL: https://{cloudfront_url}")
+    print(f"CloudFront URL: {cloudfront_url}") """
