@@ -1,6 +1,11 @@
 import boto3
 from dotenv import load_dotenv
 import os
+from flask import Flask, jsonify  # Importa jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Permite CORS para todas las rutas
 
 # Load environment variables from .env file
 load_dotenv()
@@ -74,6 +79,15 @@ class ContentDelivery:
                 urls.append(url)
             return urls
 
+@app.route('/get-urls', methods=['GET'])
+def get_urls():
+    """Endpoint para obtener las URLs de los objetos en S3."""
+    try:
+        s3_urls = cdn.get_s3_object_urls(base_url='https://' + cdn.get_cloudfront_url())
+        return jsonify(s3_urls)  # Devuelve las URLs como un JSON
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500  # Manejo de errores
+
 if __name__ == '__main__':
     load_dotenv()  # Cargar variables de entorno desde .env
 
@@ -84,18 +98,4 @@ if __name__ == '__main__':
     # Inicializar la clase ContentDelivery
     cdn = ContentDelivery(s3_bucket_name, aws_access_key_id, aws_secret_access_key)
 
-    base_url = 'https://' + cdn.get_cloudfront_url()  # Proporcionar la URL de CloudFront si el bucket es público
-
-    # Obtener las URLs de objetos en S3
-    s3_urls = cdn.get_s3_object_urls(base_url=base_url)  # Pasar base_url si el bucket es público
-    # OR
-    # s3_urls = cdn.get_s3_object_urls()  # Para URLs pre-firmadas (bucket privado)
-
-    if s3_urls:
-        print("S3 URLs:")
-        # content = Content()  # Crear una instancia de la clase Content
-        for url in s3_urls:
-            print(url)
-            # properties = content.get_s3_object_properties(url)  # Llamar al método get_s3_object_properties a través de la instancia
-            # print("Properties:", properties)
-
+    app.run(debug=True, host='0.0.0.0', port=5000)  # Aquí se inicia el servidor

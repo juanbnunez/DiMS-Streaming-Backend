@@ -1,4 +1,4 @@
-#!C:\DiMS-Streaming-Backend\myenv\bin\python.exe
+#!D:\TEC\Sistemas Operativos\PrimerProyecto\DiMS-Streaming-Backend\myenv\Scripts\python.exe
 
 import sys
 import json
