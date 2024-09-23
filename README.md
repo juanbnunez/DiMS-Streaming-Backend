@@ -80,7 +80,7 @@ DiMS-Streaming-Backend is a cloud-based system that enables users to access and 
 
 ## Diagrams
 Backend Architecture Diagram:
-![Backend Architecture Diagram](https://drive.google.com/file/d/1IQDQpbbOB_wACuJcOXRQNDSKeo4Oa48h/view?usp=sharing)
+![Backend Architecture Diagram](https://drive.google.com/uc?export=view&id=1IQDQpbbOB_wACuJcOXRQNDSKeo4Oa48h)
 
 Complete Platform Diagram:
 ![Complete Platform Diagram](https://drive.google.com/uc?export=view&id=114P-6PvblfqZbKtfffKcamwLzFW6R-nZ)
